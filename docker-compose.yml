@@ -1,0 +1,39 @@
+version: "3.6"
+services:
+  api:
+    container_name: api
+    environment:
+      - BASE_PATH=http://localhost:8080
+      - DB_NAME=${POSTGRES_DB}
+      - DB_HOST=${POSTGRES_HOST}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_PORT=${POSTGRES_PORT}
+      - DB_USER=${POSTGRES_USER}
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=8080
+    image: node
+    networks:
+      - net
+    ports:
+      - 8080:8080
+    restart: always
+    stdin_open: true
+    volumes:
+      - ./api:/api
+    working_dir: /api
+
+  db:
+    container_name: db
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    image: postgres
+    networks:
+      - net
+    ports:
+      - 5432:5432
+    restart: always
+
+networks:
+  net:

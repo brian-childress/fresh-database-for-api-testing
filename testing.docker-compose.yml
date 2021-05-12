@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  api:
+    # command: ["npm", "run", "test:integration"]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  db:
+    volumes:
+      - ./api/tests/seed-data:/tests
+      - ./api/database:/tests/database
