@@ -2,7 +2,7 @@
 
 ## How it works?
 
-The entire application is contianerized using [Docker]() containers and [Docker Compose]() for orchestration. Anytime we need a "new database" we can provision DROP/CREATE TABLEs delete or add data, whatever makes sense for each test or suite of tests. We leverage a concept of "sibling containers" in that we have two or more containers (API, Database, etc.) operating in individual containers side by side. Using Docker networking to communicate between containers. Then by using the [Docker socket]() we can execute commands from one container to another container as if we were operating on the target container the whole time. Docker socket communication leverages the Docker API to execute commands which we use to then execute database commands for our tests. The process of creating a new empty database is really pretty quick.
+The entire application is contianerized using [Docker](https://www.docker.com/) containers and [Docker Compose](https://docs.docker.com/compose/) for orchestration. Anytime we need a "new database" we can provision DROP/CREATE TABLEs delete or add data, whatever makes sense for each test or suite of tests. We leverage a concept of "sibling containers" in that we have two or more containers (API, Database, etc.) operating in individual containers side by side. Using Docker networking to communicate between containers. Then by using `cURL` and the [Docker socket](https://docs.docker.com/engine/api/sdk/examples/) we can execute commands from one container to another container as if we were operating on the target container the whole time. Docker socket communication leverages the Docker API to execute commands which we use to then execute database commands for our tests. The process of creating a new empty database is really pretty quick.
 
 ## Features
 
@@ -19,23 +19,23 @@ This application is set up like most web APIs using a common set of patterns and
 - ExpressJS
 - PostgreSQL
 - JSON Web Token (JWT)
-- Docker
+- Docker, Docker Compose
 
 ## Folder Structure
 
-|- example-app
-|---- .env <-- Create for each environment
-|---- docker-compose.yml
-|---- dev.docker-compose.yml
-|---- testing.docker-compose.yml
-|---- api/
-|------- app.js <-- Main entrypoint for application
-|----- database/ <-- Database schemas, exported from database
-|----- middleware/
-|----- scripts/ <-- Scripts used export/import database schema, setup
-|----- services/
-|----- tests/
-|----- utilities/
+|- example-app  
+|---- .env <-- Create for each environment  
+|---- docker-compose.yml  
+|---- dev.docker-compose.yml  
+|---- testing.docker-compose.yml  
+|---- api/  
+|------- app.js <-- Main entrypoint for application  
+|----- database/ <-- Database schemas, exported from database  
+|----- middleware/  
+|----- scripts/ <-- Scripts used export/import database schema, setup  
+|----- services/  
+|----- tests/  
+|----- utilities/  
 
 ## Initial Setup
 
